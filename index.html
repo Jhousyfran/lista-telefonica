@@ -69,19 +69,21 @@
             </tbody>
         </table>
         <hr>
-        <input class="form-control" type="text" name="nome" ng-model="contato.nome" id="" placeholder="Nome">
-        <input class="form-control" type="text" name="telefone" ng-model="contato.telefone" id=""
-            placeholder="Telefone">
-        <select class="form-control" ng-model="contato.operadora"
-            ng-options="operadora.nome as operadora.nome for operadora in operadoras">
-            <option value="">Selecione uma operadora</option>
-        </select>
-        <button class="btn btn-primary btn-block" ng-click="addContato(contato)"
-            ng-disabled="!contato.nome || !contato.telefone">
-            Adicionar Contato
-        </button>
-        <button class="btn btn-block btn-danger" ng-click="rmContato(contatos)"
-            ng-disabled="isContatoSelecionado(contatos)">
+        <div ng-show="isContatoSelecionado(contatos)">
+            <input class="form-control" type="text" name="nome" ng-model="contato.nome" id="" placeholder="Nome">
+            <input class="form-control" type="text" name="telefone" ng-model="contato.telefone" id=""
+                placeholder="Telefone">
+            <select class="form-control" ng-model="contato.operadora"
+                ng-options="operadora.nome as operadora.nome for operadora in operadoras">
+                <option value="">Selecione uma operadora</option>
+            </select>
+            <button class="btn btn-primary btn-block" ng-click="addContato(contato)"
+                ng-disabled="!contato.nome || !contato.telefone">
+                Adicionar Contato
+            </button>
+        </div>
+        <button ng-show="!isContatoSelecionado(contatos)" class="btn btn-block btn-danger"
+            ng-click="rmContato(contatos)" ng-disabled="isContatoSelecionado(contatos)">
             Excluír Contato
         </button>
     </div>
