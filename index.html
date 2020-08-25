@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular-messages.js"></script>
     <script>
-        angular.module("listaTelefonica", []);
+        angular.module("listaTelefonica", ['ngMessages']);
         angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope) {
             $scope.app = "Lista Telefônica";
             $scope.contatos = [
@@ -80,21 +81,24 @@
                     ng-options="operadora.nome as operadora.nome for operadora in operadoras">
                     <option value="">Selecione uma operadora</option>
                 </select>
-                <div ng-show="contatoForm.nome.$error.required && contatoForm.nome.$dirty" class="alert alert-danger">
-                    Por favor preencha o nome.
+                <div ng-messages="contatoForm.nome.$error" ng-show="contatoForm.nome.$dirty">
+                    <div ng-message="required" class="alert alert-danger">
+                        Por favor preencha o nome.
+                    </div>
+                    <div ng-message="minlength" class="alert alert-danger">
+                        O nome deve ter no mínimo 3 caracteres.
+                    </div>
                 </div>
-                <div ng-show="contatoForm.nome.$error.minlength" class="alert alert-danger">
-                    O nome deve ter no mínimo 3 caracteres.
-                </div>
-                <div ng-show="contatoForm.telefone.$error.required && contatoForm.telefone.$dirty"
-                    class="alert alert-danger">
-                    Por favor preencha o telefone.
-                </div>
-                <div ng-show="contatoForm.telefone.$error.minlength" class="alert alert-danger">
-                    O telefone deve ter no mínimo 8 digitos.
-                </div>
-                <div ng-show="contatoForm.telefone.$error.pattern" class="alert alert-danger">
-                    O telefone deve ser no formato 9999-9999.
+                <div ng-messages="contatoForm.telefone.$error" ng-show="contatoForm.telefone.$dirty">
+                    <div ng-message="required" class="alert alert-danger">
+                        Por favor preencha o telefone.
+                    </div>
+                    <div ng-message="minlength" class="alert alert-danger">
+                        O telefone deve ter no mínimo 8 digitos.
+                    </div>
+                    <div ng-message="pattern" class="alert alert-danger">
+                        O telefone deve ser no formato 9999-9999.
+                    </div>
                 </div>
                 <button class="btn btn-primary btn-block" ng-click="addContato(contato)"
                     ng-disabled="!contato.nome || !contato.telefone">
