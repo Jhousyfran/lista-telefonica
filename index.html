@@ -29,6 +29,18 @@
                 $scope.contatos.push(contato);
                 delete $scope.contato;
             }
+
+            $scope.rmContato = function (contatos) {
+                $scope.contatos = contatos.filter(function (contato) {
+                    if (!contato.selecionado) return contato;
+                });
+            }
+
+            $scope.isContatoSelecionado = function (contatos) {
+                return !contatos.some(function (contato) {
+                    return contato.selecionado;
+                });
+            }
         })
     </script>
 </head>
@@ -67,6 +79,10 @@
         <button class="btn btn-primary btn-block" ng-click="addContato(contato)"
             ng-disabled="!contato.nome || !contato.telefone">
             Adicionar Contato
+        </button>
+        <button class="btn btn-block btn-danger" ng-click="rmContato(contatos)"
+            ng-disabled="isContatoSelecionado(contatos)">
+            Excluír Contato
         </button>
     </div>
 </body>
