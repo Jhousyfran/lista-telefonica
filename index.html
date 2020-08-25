@@ -70,17 +70,23 @@
         </table>
         <hr>
         <div ng-show="isContatoSelecionado(contatos)">
-            <input class="form-control" type="text" name="nome" ng-model="contato.nome" id="" placeholder="Nome">
-            <input class="form-control" type="text" name="telefone" ng-model="contato.telefone" id=""
-                placeholder="Telefone">
-            <select class="form-control" ng-model="contato.operadora"
-                ng-options="operadora.nome as operadora.nome for operadora in operadoras">
-                <option value="">Selecione uma operadora</option>
-            </select>
-            <button class="btn btn-primary btn-block" ng-click="addContato(contato)"
-                ng-disabled="!contato.nome || !contato.telefone">
-                Adicionar Contato
-            </button>
+            <form name="contatoForm">
+                <input class="form-control" type="text" name="nome" ng-model="contato.nome" id="" placeholder="Nome"
+                    ng-required="true">
+                <input class="form-control" type="text" name="telefone" ng-model="contato.telefone" ng-required="true"
+                    id="" placeholder="Telefone">
+                <select class="form-control" ng-model="contato.operadora"
+                    ng-options="operadora.nome as operadora.nome for operadora in operadoras">
+                    <option value="">Selecione uma operadora</option>
+                </select>
+                <div ng-show="contatoForm.$invalid" class="alert alert-danger">
+                    Por favor preencha nome e telefone.
+                </div>
+                <button class="btn btn-primary btn-block" ng-click="addContato(contato)"
+                    ng-disabled="!contato.nome || !contato.telefone">
+                    Adicionar Contato
+                </button>
+            </form>
         </div>
         <button ng-show="!isContatoSelecionado(contatos)" class="btn btn-block btn-danger"
             ng-click="rmContato(contatos)" ng-disabled="isContatoSelecionado(contatos)">
