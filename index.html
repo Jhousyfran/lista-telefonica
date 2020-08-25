@@ -13,9 +13,9 @@
         angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope) {
             $scope.app = "Lista Telefônica";
             $scope.contatos = [
-                { nome: "Pedro", telefone: "33561302" },
-                { nome: "Ana", telefone: "33561114" },
-                { nome: "Maria", telefone: "33561504" },
+                { nome: "Pedro", telefone: "3356-1302" },
+                { nome: "Ana", telefone: "3356-1114" },
+                { nome: "Maria", telefone: "3356-1504" },
             ];
 
             $scope.operadoras = [
@@ -75,7 +75,7 @@
                 <input class="form-control" type="text" name="nome" ng-model="contato.nome" id="" placeholder="Nome"
                     ng-required="true" ng-minlength="3">
                 <input class="form-control" type="text" name="telefone" ng-model="contato.telefone" ng-required="true"
-                    ng-minlength="8" placeholder="Telefone">
+                    ng-minlength="8" ng-pattern="/^\d{4,5}-\d{4}$/" placeholder="Telefone">
                 <select class="form-control" ng-model="contato.operadora"
                     ng-options="operadora.nome as operadora.nome for operadora in operadoras">
                     <option value="">Selecione uma operadora</option>
@@ -92,6 +92,9 @@
                 </div>
                 <div ng-show="contatoForm.telefone.$error.minlength" class="alert alert-danger">
                     O telefone deve ter no mínimo 8 digitos.
+                </div>
+                <div ng-show="contatoForm.telefone.$error.pattern" class="alert alert-danger">
+                    O telefone deve ser no formato 9999-9999.
                 </div>
                 <button class="btn btn-primary btn-block" ng-click="addContato(contato)"
                     ng-disabled="!contato.nome || !contato.telefone">
