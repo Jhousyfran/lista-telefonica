@@ -47,7 +47,10 @@
         <input class="form-control" type="text" name="nome" ng-model="contato.nome" id="" placeholder="Nome">
         <input class="form-control" type="text" name="telefone" ng-model="contato.telefone" id=""
             placeholder="Telefone">
-        <button class="btn btn-primary btn-block" ng-click="addContato(contato)">Adicionar Contato</button>
+        <button class="btn btn-primary btn-block" ng-click="addContato(contato)"
+            ng-disabled="!contato.nome || !contato.telefone">
+            Adicionar Contato
+        </button>
     </div>
 </body>
 
