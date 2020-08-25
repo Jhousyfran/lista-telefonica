@@ -1,5 +1,5 @@
 # lista-telefonica-angularjs
-App de lista telefonica simples com AngularJs, utilizando as principais diretivas:
+App de lista telefônica simples com AngularJs, utilizando as principais diretivas:
 
 
 - ng-repeat, ng-model
@@ -9,7 +9,7 @@ App de lista telefonica simples com AngularJs, utilizando as principais diretiva
 - ng-show e ng-hide
 - ng-include
 - $valid e $invalid
-- $pritine e $dirty
+- $pristine e $dirty
 - $minlength e $maxlength
 - ng-pattern
 - ng-messages
