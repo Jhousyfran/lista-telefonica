@@ -11,7 +11,17 @@
     <script>
         angular.module("listaTelefonica", []);
         angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope) {
-            $scope.app = "Lista Telefônica"
+            $scope.app = "Lista Telefônica";
+            $scope.contatos = [
+                { nome: "Pedro", telefone: "33561302" },
+                { nome: "Ana", telefone: "33561114" },
+                { nome: "Maria", telefone: "33561504" },
+            ];
+
+            $scope.addContato = function (contato) {
+                $scope.contatos.push(contato);
+                delete $scope.contato;
+            }
         })
     </script>
 </head>
@@ -19,6 +29,25 @@
 <body ng-controller="listaTelefonicaCtrl">
     <div class="jumbotron">
         <h4>{{ app }}</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="contato in contatos">
+                    <td>{{ contato.nome}}</td>
+                    <td>{{ contato.telefone }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <input class="form-control" type="text" name="nome" ng-model="contato.nome" id="" placeholder="Nome">
+        <input class="form-control" type="text" name="telefone" ng-model="contato.telefone" id=""
+            placeholder="Telefone">
+        <button class="btn btn-primary btn-block" ng-click="addContato(contato)">Adicionar Contato</button>
     </div>
 </body>
 
@@ -29,6 +58,10 @@
         margin-left: auto;
         margin-right: auto;
         margin-top: 20px;
+    }
+
+    .form-control {
+        margin-bottom: 5px;
     }
 </style>
 
